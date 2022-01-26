@@ -1,22 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const contacts = require("../../models/contacts");
+const contacts = require("../../models/contacts/index");
 const createError = require("http-errors");
 const { addValidation } = require("../../middlewares/validationContacts");
-router.get("/", async (req, res, next) => {
-  try {
-    const result = await contacts.listContacts();
-    if (!result) {
-      throw new createError(404, "Not found");
-    }
-    res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
-});
-const express = require('express')
-const router = express.Router()
-
 
 router.get("/:contactId", async (req, res, next) => {
   try {
@@ -71,9 +57,8 @@ router.put("/:contactId", addValidation, async (req, res, next) => {
   }
 });
 
-
 module.exports = router;
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-module.exports = router
+router.put("/:contactId", async (req, res, next) => {
+  res.json({ message: "template message" });
+});
+module.exports = router;
