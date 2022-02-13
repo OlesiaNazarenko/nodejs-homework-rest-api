@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs/dist/bcrypt");
 const express = require("express");
 const createError = require("http-errors");
 const router = express.Router();
+const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
 const { User, schemas } = require("../../models/user");
 const { SECRET_KEY } = process.env;
@@ -18,7 +19,12 @@ router.post("/signup", async (req, res, next) => {
     }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-    const result = await User.create({ email, password: hashPassword });
+    const avatarURL = gravatar.url(email);
+    const result = await User.create({
+      email,
+      avatarURL,
+      password: hashPassword,
+    });
     res.status(201).json({ user: { email: email, subscribtion: "starter" } });
   } catch (error) {
     next(error);

@@ -1,2 +1,3 @@
 const authentication = require("../middlewares/authentication");
-module.exports = { authentication };
+const upload = require("./upload");
+module.exports = { authentication, upload };

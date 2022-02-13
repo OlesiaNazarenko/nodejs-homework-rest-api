@@ -1,3 +1,4 @@
+const { string } = require("joi");
 const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 const emailRegexp =
@@ -23,6 +24,9 @@ const schema = Schema(
     token: {
       type: String,
       default: "",
+    },
+    avatarURL: {
+      type: String,
     },
   },
   { versionKey: false, timestamps: true }
