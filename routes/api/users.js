@@ -1,16 +1,19 @@
 const express = require("express");
-const { authentication } = require("../../middlewares");
-const { User } = require("../../models/user");
+const { authentication, upload } = require("../../middlewares");
 const router = express.Router();
-router.get("/current", authentication, async (req, res, next) => {
-  res.status(200).json({
-    email: req.user.email,
-    subscription: req.user.subscription,
-  });
-});
-router.get("/logout", authentication, async (req, res, next) => {
-  const { _id } = req.user;
-  await User.findByIdAndUpdate(_id, { token: "" });
-  res.status(204).send();
-});
+const {
+  currentUser,
+  updateAvatars,
+  logoutUser,
+} = require("../../controllers/users");
+
+router.get("/current", authentication, currentUser);
+router.get("/logout", authentication, logoutUser);
+router.patch(
+  "/avatars",
+  authentication,
+  upload.single("avatar"),
+  updateAvatars
+);
+
 module.exports = router;
