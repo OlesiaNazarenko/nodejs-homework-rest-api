@@ -5,6 +5,8 @@ const {
   currentUser,
   updateAvatars,
   logoutUser,
+  verificationToken,
+  verify,
 } = require("../../controllers/users");
 
 router.get("/current", authentication, currentUser);
@@ -15,5 +17,7 @@ router.patch(
   upload.single("avatar"),
   updateAvatars
 );
+router.get("/verify/:verificationToken", verificationToken);
 
+router.post("/verify", verify);
 module.exports = router;
