@@ -1,7 +1,7 @@
 const { User, schemas } = require("../../models/user");
 const createError = require("http-errors");
 const Joi = require("joi");
-const { sendMail } = require("../../helpers");
+const { sendMail } = require("../../service");
 async function verify(req, res, next) {
   try {
     const { error } = schemas.verify.validate(req.body);

@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs/dist/bcrypt");
 const gravatar = require("gravatar");
 const { User, schemas } = require("../../models/user");
 const { v4 } = require("uuid");
-const { sendMail } = require("../../helpers/");
+const { sendMail } = require("../../service/");
 async function signup(req, res, next) {
   try {
     const { error } = schemas.register.validate(req.body);
