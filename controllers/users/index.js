@@ -1,4 +1,12 @@
 const currentUser = require("./currentUser");
 const logoutUser = require("./logoutUser");
 const updateAvatars = require("./updateAvatars");
-module.exports = { currentUser, logoutUser, updateAvatars };
+const verificationToken = require("./verificationToken");
+const verify = require("./verify");
+module.exports = {
+  currentUser,
+  logoutUser,
+  updateAvatars,
+  verificationToken,
+  verify,
+};
